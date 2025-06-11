@@ -3,7 +3,7 @@ import FailureEntity from "../../../domain/entities/failureEntity";
 
 export interface LoginState {
   status: LoginStatus;
-  error: string | null;
+  error: String | null;
 }
 
 export enum LoginStatus {
@@ -54,7 +54,9 @@ export const loginUser = createAsyncThunk<void, loginParams>(
     const result = await new Promise((resolve) => setTimeout(resolve, 2000));
 
     if (result instanceof FailureEntity) {
-      thunk.dispatch(loginSlice.actions.loginFailure("test"));
+      thunk.dispatch(
+        loginSlice.actions.loginFailure(FailureEntity.toJson(result))
+      );
     } else {
       thunk.dispatch(loginSlice.actions.loginSuccess());
     }

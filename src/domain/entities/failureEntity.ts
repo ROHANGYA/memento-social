@@ -14,4 +14,8 @@ export default class FailureEntity {
     this.underlyingException = failure.underlyingException;
     this.statusCode = failure.statusCode;
   }
+
+  static toJson(failure: FailureEntity): string {
+    return JSON.stringify(failure);
+  }
 }
