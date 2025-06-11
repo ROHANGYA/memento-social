@@ -38,12 +38,19 @@ export const loginSlice = createSlice({
   },
 });
 
-export const loginUser = createAsyncThunk<void>(
+export type loginParams = {
+  email: string;
+  password: string;
+};
+
+export const loginUser = createAsyncThunk<void, loginParams>(
   "loginSlice",
-  async (_, thunk) => {
+  async (params, thunk) => {
     thunk.dispatch(loginSlice.actions.loginLoading());
 
-    // repository or use-case call.
+    // TODO: Add input validation
+
+    // TODO: add repository or use-case call.
     const result = await new Promise((resolve) => setTimeout(resolve, 2000));
 
     if (result instanceof FailureEntity) {

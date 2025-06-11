@@ -16,7 +16,7 @@ import {
 } from "../../state/login/loginSlice";
 import LoadingPlaceholder from "../../components/loadingPlaceholder";
 import ErrorPlaceholder from "../../components/errorPlaceholder";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function LoginScreen() {
   const strings = useLocalisation();
@@ -24,6 +24,9 @@ function LoginScreen() {
 
   const state = useSelector((state: RootState) => state.login);
   const dispatch = useDispatch<AppDispatch>();
+
+  const email = useRef("");
+  const password = useRef("");
 
   useEffect(() => {
     if (state.status === LoginStatus.LoginSuccess) {
@@ -50,10 +53,12 @@ function LoginScreen() {
       <Text style={styles.textTitle}>{strings.mementoSocial}</Text>
       <Text style={styles.text}>Login to your account</Text>
       <MementoTextInput
+        ref={email}
         hint={"Enter your email ..."}
         leftIcon={"account-circle-outline"}
       />
       <MementoTextInput
+        ref={password}
         hint={"Enter your password ..."}
         leftIcon={"lock-outline"}
         isPasswordField={true}
@@ -62,7 +67,10 @@ function LoginScreen() {
         label={strings.Signin}
         mode={"contained"}
         onPress={() => {
-          dispatch(loginUser());
+          console.log(`email: ${email.current} --- pass: ${password.current}`);
+          dispatch(
+            loginUser({ email: email.current, password: password.current })
+          );
         }}
       />
       <View style={styles.buttonPadding} />

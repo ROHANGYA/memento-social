@@ -1,21 +1,27 @@
 import { TextInput, useTheme } from "react-native-paper";
 import { StyleSheet } from "react-native";
 import { IconSource } from "react-native-paper/lib/typescript/components/Icon";
-import React, { useState } from "react";
+import React, { RefObject, useState } from "react";
 
 type MementoTextInputProps = {
   leftIcon?: IconSource;
   hint: string;
   isPasswordField?: boolean;
+  ref: RefObject<String>;
 };
 
 function MementoTextInput({
   leftIcon,
   hint,
   isPasswordField = false,
+  ref,
 }: MementoTextInputProps) {
   const [isPasswordVisible, setPasswordVisibility] = useState(false);
   const theme = useTheme();
+
+  function onTextChanged(newInput: string) {
+    ref.current = newInput;
+  }
 
   return (
     <TextInput
@@ -32,6 +38,7 @@ function MementoTextInput({
         ) : undefined
       }
       style={styles.container}
+      onChangeText={onTextChanged}
     />
   );
 }
