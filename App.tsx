@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { PaperProvider } from "react-native-paper";
+import AppNavigation from "./src/presentation/navigation/navigation";
+import { Provider } from "react-redux";
+import { globalStore } from "./src/presentation/state/store";
+import { appTheme } from "./src/presentation/styles/theme";
+import { I18nextProvider } from "react-i18next";
+import { i18nLocale } from "./src/lang/lang";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={globalStore}>
+      <I18nextProvider i18n={i18nLocale}>
+        <PaperProvider theme={appTheme}>
+          <AppNavigation />
+        </PaperProvider>
+      </I18nextProvider>
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
