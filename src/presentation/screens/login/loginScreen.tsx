@@ -7,20 +7,42 @@ import MementoButton from "../../components/mementoButton";
 import { useLocalisation } from "../../../lang/lang";
 import { logoFontFamily } from "../../styles/theme";
 import { Routes } from "../../navigation/routes";
-import { RootState } from "../../state/store";
+import { AppDispatch, RootState } from "../../state/store";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginStatus } from "../../state/login/loginSlice";
+import {
+  LoginStatus,
+  loginUser,
+  resetState,
+} from "../../state/login/loginSlice";
 import LoadingPlaceholder from "../../components/loadingPlaceholder";
+import ErrorPlaceholder from "../../components/errorPlaceholder";
+import { useEffect } from "react";
 
 function LoginScreen() {
   const strings = useLocalisation();
   const navigation = useNavigation();
 
   const state = useSelector((state: RootState) => state.login);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (state.status === LoginStatus.LoginSuccess) {
+      navigation.dispatch(StackActions.push(Routes.Main));
+      dispatch(resetState());
+    }
+  });
 
   if (state.status === LoginStatus.LoginLoading) {
     return scaffold(<LoadingPlaceholder />);
+  }
+
+  if (state.status === LoginStatus.LoginLoadingFailed) {
+    return scaffold(
+      <ErrorPlaceholder
+        failure={{}}
+        OnRetryClick={() => dispatch(resetState())}
+      />
+    );
   }
 
   return scaffold(
@@ -37,10 +59,10 @@ function LoginScreen() {
         isPasswordField={true}
       />
       <MementoButton
-        label={"Sign in"}
+        label={strings.Signin}
         mode={"contained"}
         onPress={() => {
-          navigation.dispatch(StackActions.push(Routes.Main));
+          dispatch(loginUser());
         }}
       />
       <View style={styles.buttonPadding} />

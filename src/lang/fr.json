@@ -1,3 +1,11 @@
 {
-  "mementoSocial": "MementoSocial"
+  "mementoSocial": "MementoSocial",
+  "settings": "Settings",
+  "anErrorHasOccurredPleaseTryAgain": "An error has occurred, please try again later.",
+  "somethingWentWrong": "Something went wrong",
+  "retry": "Retry",
+  "Signin": "Sign in",
+  "enterYourEmail": "Enter your email ...",
+  "enterYourPassword": "Enter your password ...",
+  "forgotPassword": "Forgot password ?"
 }

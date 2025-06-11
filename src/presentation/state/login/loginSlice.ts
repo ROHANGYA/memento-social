@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import FailureEntity from "../../../domain/entities/failureEntity";
 
 export interface LoginState {
   status: LoginStatus;
@@ -21,7 +22,7 @@ export const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    loginUser: (state, action: PayloadAction<number>) => {
+    loginLoading: (state) => {
       state.status = LoginStatus.LoginLoading;
       state.error = null;
     },
@@ -33,9 +34,26 @@ export const loginSlice = createSlice({
       state.status = LoginStatus.LoginLoadingFailed;
       state.error = error.payload;
     },
+    resetState: (state) => initialState,
   },
 });
 
-export const { loginUser } = loginSlice.actions;
+export const loginUser = createAsyncThunk<void>(
+  "loginSlice",
+  async (_, thunk) => {
+    thunk.dispatch(loginSlice.actions.loginLoading());
+
+    // repository or use-case call.
+    const result = await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    if (result instanceof FailureEntity) {
+      thunk.dispatch(loginSlice.actions.loginFailure("test"));
+    } else {
+      thunk.dispatch(loginSlice.actions.loginSuccess());
+    }
+  }
+);
+
+export const { resetState } = loginSlice.actions;
 
 export default loginSlice.reducer;
