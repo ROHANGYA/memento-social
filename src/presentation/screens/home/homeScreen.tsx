@@ -1,8 +1,9 @@
 import { View, StyleSheet, ScrollView } from "react-native";
 import MementoAppBar from "../../components/mementoAppBar";
-import ImageLoader from "../../components/imageLoader";
 import { globalStyles } from "../../styles/globalStyles";
 import Animated, { FadingTransition } from "react-native-reanimated";
+import MementoPost from "../../components/mementoPost";
+import { mockPostList } from "../../../domain/entities/post";
 
 function HomeScreen() {
   return (
@@ -10,56 +11,10 @@ function HomeScreen() {
       <View style={[globalStyles.baseScreenStyle, styles.container]}>
         <MementoAppBar />
         <ScrollView style={styles.scrollContainer}>
-          <View style={styles.imageContainer}>
-            <ImageLoader
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: "https://picsum.photos/500/300" }}
-            />
-          </View>
-
-          <View style={styles.imageContainer}>
-            <ImageLoader
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: "https://picsum.photos/500/300" }}
-            />
-          </View>
-          <View style={styles.imageContainer}>
-            <ImageLoader
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: "https://picsum.photos/500/300" }}
-            />
-          </View>
-          <View style={styles.imageContainer}>
-            <ImageLoader
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: "https://picsum.photos/500/300" }}
-            />
-          </View>
-          <View style={styles.imageContainer}>
-            <ImageLoader
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: "https://picsum.photos/500/300" }}
-            />
-          </View>
-          <View style={styles.imageContainer}>
-            <ImageLoader
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: "https://picsum.photos/500/300" }}
-            />
-          </View>
-          <View style={styles.imageContainer}>
-            <ImageLoader
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: "https://picsum.photos/500/300" }}
-            />
-          </View>
+          <MementoPost
+            post={mockPostList[0]}
+            onLikeClick={function (isLiked: boolean): void {}}
+          />
         </ScrollView>
       </View>
     </Animated.View>
