@@ -5,7 +5,11 @@ export const stringMapping = {
   anErrorHasOccurredPleaseTryAgain: "anErrorHasOccurredPleaseTryAgain",
   retry: "retry",
   Signin: "Signin",
+  loginToYourAccount: "loginToYourAccount",
   enterYourEmail: "enterYourEmail",
   enterYourPassword: "enterYourPassword",
   forgotPassword: "forgotPassword",
+  errorLoadingMorePosts: "errorLoadingMorePosts",
+  thereAreNoPostsYet: "thereAreNoPostsYet",
+  PleaseTryAgainLaterOrAddOne: "PleaseTryAgainLaterOrAddOne",
 };

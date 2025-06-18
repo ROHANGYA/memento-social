@@ -18,4 +18,12 @@ export default class FailureEntity {
   static toJson(failure: FailureEntity): string {
     return JSON.stringify(failure);
   }
+
+  static fromJson(failure: string): FailureEntity {
+    try {
+      return JSON.parse(failure);
+    } catch {
+      return new FailureEntity({});
+    }
+  }
 }

@@ -6,12 +6,24 @@ type MementoButtonProps = {
   label: string;
   icon?: IconSource;
   mode: "text" | "contained" | "outlined";
+  isFullwidth?: boolean;
   onPress: () => void;
 };
 
-function MementoButton({ label, icon, mode, onPress }: MementoButtonProps) {
+function MementoButton({
+  label,
+  icon,
+  mode,
+  onPress,
+  isFullwidth,
+}: MementoButtonProps) {
   return (
-    <Button icon={icon} mode={mode} onPress={onPress} style={styles.container}>
+    <Button
+      icon={icon}
+      mode={mode}
+      onPress={onPress}
+      style={[styles.container, isFullwidth ? styles.fullWidth : null]}
+    >
       {label}
     </Button>
   );
@@ -19,8 +31,11 @@ function MementoButton({ label, icon, mode, onPress }: MementoButtonProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "auto",
     height: "auto",
+  },
+  fullWidth: {
+    width: "100%",
   },
 });
 

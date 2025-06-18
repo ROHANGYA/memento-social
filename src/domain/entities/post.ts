@@ -7,7 +7,7 @@ export type PostType = {
   image?: string | Base64URLString;
   numberOfLikes: number;
   numberOfComments: number;
-  timestamp: DateTime;
+  timestamp: string;
 };
 
 export default class Post {
@@ -16,7 +16,7 @@ export default class Post {
   image?: string | Base64URLString;
   numberOfLikes: number;
   numberOfComments: number;
-  timestamp: DateTime;
+  timestamp: string;
 
   constructor(post: PostType) {
     this.user = post.user;
@@ -26,7 +26,17 @@ export default class Post {
     this.numberOfComments = post.numberOfComments;
     this.timestamp = post.timestamp;
   }
+
+  static toJson(failure: Post): string {
+    return JSON.stringify(failure);
+  }
+
+  static fromJson(failure: string): Post {
+    return JSON.parse(failure);
+  }
 }
+
+const postDate = DateTime.now().toFormat("dd LLL yyyy");
 
 export const mockPostList = [
   new Post({
@@ -35,22 +45,22 @@ export const mockPostList = [
     image: "https://picsum.photos/seed/test/500/200",
     numberOfLikes: 4,
     numberOfComments: 2,
-    timestamp: DateTime.now(),
+    timestamp: postDate,
   }),
   new Post({
     user: { username: mockUser.username, profileImage: mockUser.profileImage },
     body: "How is everyone",
-    image: "https://picsum.photos/seed/test1/500/30",
+    image: "https://picsum.photos/seed/test1/500/200",
     numberOfLikes: 4,
     numberOfComments: 2,
-    timestamp: DateTime.now(),
+    timestamp: postDate,
   }),
   new Post({
     user: { username: mockUser.username, profileImage: mockUser.profileImage },
     body: "Having dinner rn",
-    image: "https://picsum.photos/seed/test2/500/30",
+    image: "https://picsum.photos/seed/test2/500/200",
     numberOfLikes: 4,
     numberOfComments: 2,
-    timestamp: DateTime.now(),
+    timestamp: postDate,
   }),
 ];

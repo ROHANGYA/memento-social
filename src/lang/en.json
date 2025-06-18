@@ -5,7 +5,11 @@
   "somethingWentWrong": "Something went wrong",
   "retry": "Retry",
   "Signin": "Sign in",
+  "loginToYourAccount": "Login to your account",
   "enterYourEmail": "Enter your email ...",
   "enterYourPassword": "Enter your password ...",
-  "forgotPassword": "Forgot password ?"
+  "forgotPassword": "Forgot password ?",
+  "errorLoadingMorePosts": "Error loading more posts ... ",
+  "thereAreNoPostsYet": "There are no posts yet !",
+  "PleaseTryAgainLaterOrAddOne": "Please try again later or be the first to add one"
 }

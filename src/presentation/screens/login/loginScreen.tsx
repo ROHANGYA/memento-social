@@ -51,21 +51,22 @@ function LoginScreen() {
   return scaffold(
     <>
       <Text style={styles.textTitle}>{strings.mementoSocial}</Text>
-      <Text style={styles.text}>Login to your account</Text>
+      <Text style={styles.text}>{strings.loginToYourAccount}</Text>
       <MementoTextInput
         ref={email}
-        hint={"Enter your email ..."}
+        hint={strings.enterYourEmail}
         leftIcon={"account-circle-outline"}
       />
       <MementoTextInput
         ref={password}
-        hint={"Enter your password ..."}
+        hint={strings.enterYourPassword}
         leftIcon={"lock-outline"}
         isPasswordField={true}
       />
       <MementoButton
         label={strings.Signin}
         mode={"contained"}
+        isFullwidth={true}
         onPress={() => {
           console.log(`email: ${email.current} --- pass: ${password.current}`);
           dispatch(
@@ -75,7 +76,7 @@ function LoginScreen() {
       />
       <View style={styles.buttonPadding} />
       <MementoButton
-        label={"Forgot password ?"}
+        label={strings.forgotPassword}
         mode={"text"}
         onPress={() => {}}
       />

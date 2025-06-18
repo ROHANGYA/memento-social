@@ -7,6 +7,7 @@ export interface HomeState {
   pageNumber: number;
   posts: Post[];
   error: string | null;
+  isLastPage: boolean;
 }
 
 export enum HomeStatus {
@@ -22,6 +23,7 @@ const initialState: HomeState = {
   pageNumber: 0,
   posts: [],
   error: null,
+  isLastPage: false,
 };
 
 export const homeSlice = createSlice({
@@ -35,9 +37,10 @@ export const homeSlice = createSlice({
           : HomeStatus.LoadingNextPosts;
       state.pageNumber = state.pageNumber + 1;
     },
-    postsLoaded: (state, data: PayloadAction<Post[]>) => {
+    postsLoaded: (state, data: PayloadAction<string[]>) => {
       state.status = HomeStatus.LoadedPosts;
-      state.posts = data.payload;
+      state.posts.push(...data.payload.map((post) => Post.fromJson(post)));
+      state.isLastPage = data.payload.length == 0;
     },
     failedToLoadPosts: (state, error: PayloadAction<string>) => {
       state.status =
@@ -50,21 +53,29 @@ export const homeSlice = createSlice({
   },
 });
 
-export const fetchPosts = createAsyncThunk<void, void>(
+export type fetchPostsParams = {
+  isRefresh: boolean;
+};
+
+export const fetchPosts = createAsyncThunk<void, fetchPostsParams | undefined>(
   "fetch posts",
-  async (_, thunk) => {
-    thunk.dispatch(homeSlice.actions.loadNextPage());
+  async (params, thunk) => {
+    params?.isRefresh
+      ? thunk.dispatch(homeSlice.actions.resetState())
+      : thunk.dispatch(homeSlice.actions.loadNextPage());
 
     // TODO: add repository or use-case call.
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const result = mockPostList;
+    const result: Post[] = mockPostList;
 
     if (result instanceof FailureEntity) {
       thunk.dispatch(
         homeSlice.actions.failedToLoadPosts(FailureEntity.toJson(result))
       );
     } else {
-      thunk.dispatch(homeSlice.actions.postsLoaded(result));
+      thunk.dispatch(
+        homeSlice.actions.postsLoaded(result.map((post) => Post.toJson(post)))
+      );
     }
   }
 );

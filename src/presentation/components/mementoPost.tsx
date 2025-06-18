@@ -23,7 +23,7 @@ function MementoPost({ post }: MementoPostProps) {
         />
         <View>
           <Text>{post.user.username}</Text>
-          <Text>{post.timestamp.toFormat("dd LLL yyyy")}</Text>
+          <Text>{post.timestamp}</Text>
         </View>
       </View>
       <Text style={styles.postText}>{post.body}</Text>
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: "100%",
     height: 200,
-    marginBottom: 4,
   },
   reactionsRow: {
     flexDirection: "row",
