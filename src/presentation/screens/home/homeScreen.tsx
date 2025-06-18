@@ -97,7 +97,7 @@ function HomeScreen() {
     return (
       <Animated.View layout={FadingTransition}>
         <View style={[globalStyles.baseScreenStyle, styles.container]}>
-          <MementoAppBar />
+          <MementoAppBar title={strings.mementoSocial} centered={true} />
           {child}
         </View>
       </Animated.View>
