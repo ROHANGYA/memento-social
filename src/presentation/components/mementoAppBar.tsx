@@ -9,7 +9,7 @@ type MementoAppBarProps = {
 
 function MementoAppBar({ title, centered, backAction }: MementoAppBarProps) {
   return (
-    <Appbar.Header elevated={true}>
+    <Appbar.Header elevated={true} style={styles.container}>
       {backAction ? <Appbar.BackAction onPress={backAction} /> : <></>}
       <Appbar.Content
         title={title}
@@ -22,7 +22,8 @@ function MementoAppBar({ title, centered, backAction }: MementoAppBarProps) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "auto",
+    height: 50,
+    elevation: 4,
   },
   centeredTitle: {
     textAlign: "center",
