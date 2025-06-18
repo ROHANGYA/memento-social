@@ -30,10 +30,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingTop: 20,
   },
-  image: {
-    height: 200,
-    borderRadius: 14,
-  },
   imageContainer: {
     width: "100%",
     height: 200,

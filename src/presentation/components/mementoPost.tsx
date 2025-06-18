@@ -14,15 +14,19 @@ function MementoPost({ post }: MementoPostProps) {
   const [isLiked, setLike] = useState(false);
 
   return (
-    <View>
+    <View style={styles.card}>
       <View style={styles.profileRow}>
         <ImageLoader
           style={styles.profileImage}
           resizeMode="cover"
           source={{ uri: post.user.profileImage }}
         />
-        <Text>{post.body}</Text>
+        <View>
+          <Text>{post.user.username}</Text>
+          <Text>12 july 2025</Text>
+        </View>
       </View>
+      <Text style={styles.postText}>{post.body}</Text>
       <View style={styles.imageContainer}>
         <ImageLoader
           style={styles.image}
@@ -31,23 +35,37 @@ function MementoPost({ post }: MementoPostProps) {
         />
       </View>
 
-      <TouchableOpacity
-        style={styles.reactionsRow}
-        onPress={() => setLike((state) => !state)}
-      >
-        <AntDesign name={isLiked ? "like1" : "like2"} size={24} color="black" />
-        <Text>{post.numberOfLikes}</Text>
-      </TouchableOpacity>
+      <View style={styles.reactionsRow}>
+        <TouchableOpacity
+          style={styles.reactionItem}
+          onPress={() => setLike((state) => !state)}
+        >
+          <AntDesign
+            name={isLiked ? "like1" : "like2"}
+            size={24}
+            color="black"
+          />
+          <Text>{post.numberOfLikes}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.reactionItem} onPress={() => {}}>
+          <AntDesign name="message1" size={24} color="black" />
+          <Text>{post.numberOfLikes}</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {},
+  card: {
+    gap: 20,
+  },
   profileRow: {
     flexDirection: "row",
+    gap: 8,
+    alignItems: "center",
   },
-  profileImage: { height: 50, width: 20, borderRadius: 14 },
+  profileImage: { height: 50, width: 50, borderRadius: 14 },
   image: {
     height: 200,
     borderRadius: 14,
@@ -55,10 +73,21 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: "100%",
     height: 200,
-    marginBottom: 40,
+    marginBottom: 4,
   },
   reactionsRow: {
     flexDirection: "row",
+    alignItems: "center",
+    gap: 28,
+    marginLeft: 18,
+  },
+  reactionItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  postText: {
+    marginStart: 16,
   },
 });
 

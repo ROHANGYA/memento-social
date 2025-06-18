@@ -5,6 +5,7 @@ import {
   ImageSourcePropType,
   ImageStyle,
   StyleProp,
+  StyleSheet,
   View,
 } from "react-native";
 import { AssetUtil } from "../../utils/assetUtil";
@@ -16,7 +17,7 @@ type Props = {
 };
 
 function ImageLoader({ style, resizeMode, source }: Props) {
-  const [loaded, setLoaded] = useState(false);
+  const [showPlaceholder, setPlaceholder] = useState(true);
   return (
     <View style={style}>
       {!!source ? (
@@ -25,26 +26,38 @@ function ImageLoader({ style, resizeMode, source }: Props) {
           resizeMode={resizeMode}
           style={style}
           onLoad={() => {
-            setLoaded(true);
+            setPlaceholder(false);
           }}
         />
       ) : (
-        <Placeholder loaded={loaded} style={style} />
+        <Placeholder showPlaceholder={showPlaceholder} style={style} />
       )}
     </View>
   );
 }
 
 type PlaceholderProps = {
-  loaded: boolean;
+  showPlaceholder: boolean;
   style: StyleProp<ImageStyle>;
 };
-function Placeholder({ loaded, style }: PlaceholderProps) {
-  if (loaded) {
-    return null;
+function Placeholder({ showPlaceholder, style }: PlaceholderProps) {
+  if (showPlaceholder) {
+    return (
+      <Image
+        style={[style, styles.placeholder]}
+        source={AssetUtil.imagePlaceholder}
+      />
+    );
   } else {
-    return <Image style={style} source={AssetUtil.imagePlaceholder} />;
+    return null;
   }
 }
+
+const styles = StyleSheet.create({
+  placeholder: {
+    backgroundColor: "#f5f5f5",
+    width: "auto",
+  },
+});
 
 export default ImageLoader;
