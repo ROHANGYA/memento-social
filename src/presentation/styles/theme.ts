@@ -1,8 +1,15 @@
-import { MD3LightTheme as DefaultTheme } from "react-native-paper";
+import {
+  configureFonts,
+  MD3LightTheme as DefaultTheme,
+} from "react-native-paper";
 import { ThemeProp } from "react-native-paper/lib/typescript/types";
 
 export const defaultFontFamily = "Roboto";
 export const logoFontFamily = "Caveat";
+
+const fontConfig = {
+  fontFamily: defaultFontFamily,
+};
 
 export const appTheme: ThemeProp = {
   ...DefaultTheme,
@@ -48,6 +55,9 @@ export const appTheme: ThemeProp = {
     onSurfaceDisabled: "rgba(25, 28, 27, 0.38)",
     backdrop: "rgba(41, 50, 48, 0.4)",
   },
+  fonts: configureFonts({
+    config: fontConfig,
+  }),
   // fonts: {
   // default: {
   //   fontFamily: defaultFont,
@@ -88,4 +98,5 @@ export const appTheme: ThemeProp = {
   //   lineHeight: 28,
   // },
   // },
+  // }
 };

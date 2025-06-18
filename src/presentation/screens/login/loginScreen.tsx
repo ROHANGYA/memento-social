@@ -5,7 +5,6 @@ import { globalStyles } from "../../styles/globalStyles";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import MementoButton from "../../components/mementoButton";
 import { useLocalisation } from "../../../lang/lang";
-import { logoFontFamily } from "../../styles/theme";
 import { Routes } from "../../navigation/routes";
 import { AppDispatch, RootState } from "../../state/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +16,7 @@ import {
 import LoadingPlaceholder from "../../components/loadingPlaceholder";
 import ErrorPlaceholder from "../../components/errorPlaceholder";
 import { useEffect, useRef } from "react";
+import { logoFontFamily } from "../../styles/theme";
 
 function LoginScreen() {
   const strings = useLocalisation();
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textTitle: {
-    fontSize: 30,
+    fontSize: 48,
     fontFamily: logoFontFamily,
     padding: 40,
   },

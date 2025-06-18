@@ -22,7 +22,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.rrg.mementosocial"
+      "package": "com.anonymous.mementosocial"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,7 +31,19 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Caveat.ttf", "./assets/fonts/Roboto.ttf"]
+          "fonts": ["./assets/fonts/Caveat.ttf"],
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "Caveat",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Caveat.ttf"
+                  }
+                ]
+              }
+            ]
+          }
         }
       ]
     ]
