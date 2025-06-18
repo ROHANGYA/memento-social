@@ -23,7 +23,7 @@ function MementoPost({ post }: MementoPostProps) {
         />
         <View>
           <Text>{post.user.username}</Text>
-          <Text>12 july 2025</Text>
+          <Text>{post.timestamp.toFormat("dd LLL yyyy")}</Text>
         </View>
       </View>
       <Text style={styles.postText}>{post.body}</Text>
