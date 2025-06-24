@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   loadingFooter: {
     width: "100%",
     paddingTop: 20,
+    paddingBottom: 30,
   },
 });
 
