@@ -1,10 +1,10 @@
-import { View, StyleSheet, FlatList, ListRenderItemInfo } from "react-native";
+import { View, StyleSheet, ListRenderItemInfo } from "react-native";
 import MementoAppBar from "../../components/mementoAppBar";
 import { globalStyles } from "../../styles/globalStyles";
-import Animated, { FadingTransition } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import MementoPost from "../../components/mementoPost";
 import Post from "../../../domain/entities/post";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,7 @@ import FailureEntity from "../../../domain/entities/failureEntity";
 import HomeEmptyPlaceholder from "./homeEmptyPlaceholder";
 import HomeLoadingFooter from "./homeLoadingFooter";
 import HomeErrorFooter from "./homeErrorFooter";
+import Constants from "../../../utils/constants";
 
 function HomeScreen() {
   const strings = useLocalisation();
@@ -29,24 +30,51 @@ function HomeScreen() {
     dispatch(fetchPosts());
   }, []);
 
+  const scaffold = useCallback((child: React.JSX.Element) => {
+    return (
+      <View style={[globalStyles.baseScreenStyle, styles.container]}>
+        <MementoAppBar title={strings.mementoSocial} centered={true} />
+        {child}
+      </View>
+    );
+  }, []);
+
   if (state.status === HomeStatus.LoadingPosts) {
-    return scaffold(<LoadingPlaceholder />);
+    return scaffold(
+      <Animated.View
+        entering={Constants.stateScreenTransitionEntry}
+        exiting={Constants.stateScreenTransitionExit}
+      >
+        <LoadingPlaceholder />
+      </Animated.View>
+    );
   }
 
   if (state.status === HomeStatus.FailureToLoadPosts) {
     return scaffold(
-      <ErrorPlaceholder
-        failure={FailureEntity.fromJson(state.error ?? "")}
-        OnRetryClick={() => {
-          dispatch(fetchPosts({ isRefresh: true }));
-        }}
-      />
+      <Animated.View
+        entering={Constants.stateScreenTransitionEntry}
+        exiting={Constants.stateScreenTransitionExit}
+      >
+        <ErrorPlaceholder
+          failure={FailureEntity.fromJson(state.error ?? "")}
+          OnRetryClick={() => {
+            dispatch(fetchPosts({ isRefresh: true }));
+          }}
+        />
+      </Animated.View>
     );
   }
 
   return scaffold(
-    <FlatList
+    <Animated.FlatList
+      entering={Constants.stateScreenTransitionEntry}
+      exiting={Constants.stateScreenTransitionExit}
       data={state.posts}
+      refreshing={false}
+      onRefresh={() => {
+        dispatch(fetchPosts({ isRefresh: true }));
+      }}
       //renderItem={useCallback(renderPostItem, [state.posts])}
       renderItem={renderPostItem}
       style={styles.scrollContainer}
@@ -63,15 +91,18 @@ function HomeScreen() {
           dispatch(fetchPosts());
         }
       }}
-      ListFooterComponent={resolveListFooterComponent(state.status)}
+      ListFooterComponent={resolveListFooterComponent(
+        state.status,
+        state.isLastPage
+      )}
     />
   );
 
-  function resolveListFooterComponent(state: HomeStatus) {
-    let footerComponent = null;
+  function resolveListFooterComponent(state: HomeStatus, isLastPage: boolean) {
+    let footerComponent: React.JSX.Element | null = HomeLoadingFooter();
 
-    if (state === HomeStatus.LoadingNextPosts) {
-      footerComponent = HomeLoadingFooter();
+    if (isLastPage) {
+      footerComponent = null;
     } else if (state === HomeStatus.FailureToLoadNextPosts) {
       footerComponent = HomeErrorFooter({
         errorMessage: strings.errorLoadingMorePosts,
@@ -90,17 +121,6 @@ function HomeScreen() {
         post={info.item}
         onLikeClick={function (isLiked: boolean): void {}}
       />
-    );
-  }
-
-  function scaffold(child: React.JSX.Element) {
-    return (
-      <Animated.View layout={FadingTransition}>
-        <View style={[globalStyles.baseScreenStyle, styles.container]}>
-          <MementoAppBar title={strings.mementoSocial} centered={true} />
-          {child}
-        </View>
-      </Animated.View>
     );
   }
 }

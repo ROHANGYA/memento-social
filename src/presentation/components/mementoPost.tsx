@@ -49,7 +49,7 @@ function MementoPost({ post }: MementoPostProps) {
         </TouchableOpacity>
         <TouchableOpacity style={styles.reactionItem} onPress={() => {}}>
           <AntDesign name="message1" size={24} color="black" />
-          <Text>{post.numberOfLikes}</Text>
+          <Text>{post.numberOfComments}</Text>
         </TouchableOpacity>
       </View>
     </View>
