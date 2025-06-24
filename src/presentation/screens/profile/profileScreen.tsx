@@ -5,7 +5,7 @@ import MementoAppBar from "../../components/mementoAppBar";
 function ProfileScreen() {
   return (
     <View>
-      <MementoAppBar />
+      <MementoAppBar title={"Profile"} />
       <Text>safgsgs</Text>
     </View>
   );

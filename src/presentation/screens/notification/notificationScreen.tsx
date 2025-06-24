@@ -5,7 +5,7 @@ import MementoAppBar from "../../components/mementoAppBar";
 function NotificationScreen() {
   return (
     <View>
-      <MementoAppBar />
+      <MementoAppBar title={"Notification"} />
       <Text>safgsgs</Text>
     </View>
   );
