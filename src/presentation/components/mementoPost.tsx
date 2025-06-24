@@ -10,7 +10,7 @@ type MementoPostProps = {
   onLikeClick: (isLiked: boolean) => void;
 };
 
-function MementoPost({ post }: MementoPostProps) {
+function MementoPost({ post, onLikeClick }: MementoPostProps) {
   const [isLiked, setLike] = useState(false);
 
   return (
@@ -38,14 +38,17 @@ function MementoPost({ post }: MementoPostProps) {
       <View style={styles.reactionsRow}>
         <TouchableOpacity
           style={styles.reactionItem}
-          onPress={() => setLike((state) => !state)}
+          onPress={() => {
+            setLike((state) => !state);
+            onLikeClick(isLiked);
+          }}
         >
           <AntDesign
             name={isLiked ? "like1" : "like2"}
             size={24}
             color="black"
           />
-          <Text>{post.numberOfLikes}</Text>
+          <Text>{isLiked ? post.numberOfLikes + 1 : post.numberOfLikes}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.reactionItem} onPress={() => {}}>
           <AntDesign name="message1" size={24} color="black" />
