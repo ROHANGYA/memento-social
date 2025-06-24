@@ -31,10 +31,12 @@ export const homeSlice = createSlice({
   initialState,
   reducers: {
     loadNextPage: (state) => {
-      state.status =
-        state.pageNumber === 0
-          ? HomeStatus.LoadingPosts
-          : HomeStatus.LoadingNextPosts;
+      const isFirstPage = state.pageNumber === 0;
+      if (isFirstPage) {
+        state.status = HomeStatus.LoadingPosts;
+      } else {
+        state.status = HomeStatus.LoadingNextPosts;
+      }
       state.pageNumber = state.pageNumber + 1;
     },
     postsLoaded: (state, data: PayloadAction<string[]>) => {
