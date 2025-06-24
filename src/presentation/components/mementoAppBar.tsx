@@ -1,5 +1,6 @@
 import { Appbar } from "react-native-paper";
 import { StyleSheet } from "react-native";
+import { globalStyles } from "../styles/globalStyles";
 
 type MementoAppBarProps = {
   title: string;
@@ -13,7 +14,7 @@ function MementoAppBar({ title, centered, backAction }: MementoAppBarProps) {
       {backAction ? <Appbar.BackAction onPress={backAction} /> : <></>}
       <Appbar.Content
         title={title}
-        titleStyle={centered ? styles.centeredTitle : null}
+        titleStyle={[styles.title, centered ? styles.centeredTitle : null]}
       />
     </Appbar.Header>
   );
@@ -24,6 +25,9 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
     elevation: 4,
+  },
+  title: {
+    paddingHorizontal: globalStyles.screenPaddings.paddingHorizontal,
   },
   centeredTitle: {
     textAlign: "center",
