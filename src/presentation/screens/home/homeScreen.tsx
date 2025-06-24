@@ -30,14 +30,18 @@ function HomeScreen() {
     dispatch(fetchPosts());
   }, []);
 
-  const scaffold = useCallback((child: React.JSX.Element) => {
-    return (
-      <View style={[globalStyles.baseScreenStyle, styles.container]}>
-        <MementoAppBar title={strings.mementoSocial} centered={true} />
-        {child}
-      </View>
-    );
-  }, []);
+  const renderPostItem = useCallback(
+    (info: ListRenderItemInfo<Post>) => {
+      return (
+        <MementoPost
+          key={info.index}
+          post={info.item}
+          onLikeClick={function (isLiked: boolean): void {}}
+        />
+      );
+    },
+    [state.posts]
+  );
 
   if (state.status === HomeStatus.LoadingPosts) {
     return scaffold(
@@ -75,7 +79,6 @@ function HomeScreen() {
       onRefresh={() => {
         dispatch(fetchPosts({ isRefresh: true }));
       }}
-      //renderItem={useCallback(renderPostItem, [state.posts])}
       renderItem={renderPostItem}
       style={styles.scrollContainer}
       ItemSeparatorComponent={() => <View style={styles.postSeparator} />}
@@ -98,6 +101,15 @@ function HomeScreen() {
     />
   );
 
+  function scaffold(child: React.JSX.Element) {
+    return (
+      <View style={[globalStyles.baseScreenStyle, styles.container]}>
+        <MementoAppBar title={strings.mementoSocial} centered={true} />
+        {child}
+      </View>
+    );
+  }
+
   function resolveListFooterComponent(state: HomeStatus, isLastPage: boolean) {
     let footerComponent: React.JSX.Element | null = HomeLoadingFooter();
 
@@ -112,16 +124,6 @@ function HomeScreen() {
     }
 
     return <View style={styles.scrollContainerFooter}>{footerComponent}</View>;
-  }
-
-  function renderPostItem(info: ListRenderItemInfo<Post>) {
-    return (
-      <MementoPost
-        key={info.index}
-        post={info.item}
-        onLikeClick={function (isLiked: boolean): void {}}
-      />
-    );
   }
 }
 

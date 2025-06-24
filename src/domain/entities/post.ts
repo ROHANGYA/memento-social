@@ -63,4 +63,12 @@ export const mockPostList = [
     numberOfComments: 2,
     timestamp: postDate,
   }),
+  new Post({
+    user: { username: mockUser.username, profileImage: mockUser.profileImage },
+    body: "... Am boooored",
+    image: "https://picsum.photos/seed/test2/500/200",
+    numberOfLikes: 1,
+    numberOfComments: 8,
+    timestamp: postDate,
+  }),
 ];
