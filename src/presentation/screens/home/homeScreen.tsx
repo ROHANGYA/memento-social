@@ -104,7 +104,11 @@ function HomeScreen() {
   function scaffold(child: React.JSX.Element) {
     return (
       <View style={[globalStyles.baseScreenStyle, styles.container]}>
-        <MementoAppBar title={strings.mementoSocial} centered={true} />
+        <MementoAppBar
+          title={strings.mementoSocial}
+          centered={true}
+          isSecondaryFont={true}
+        />
         {child}
       </View>
     );

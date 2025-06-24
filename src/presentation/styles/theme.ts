@@ -13,7 +13,7 @@ const fontConfig = {
 
 export const appTheme: ThemeProp = {
   ...DefaultTheme,
-  // Specify custom properties
+  // custom properties
   colors: {
     primary: "rgb(0, 107, 94)",
     onPrimary: "rgb(255, 255, 255)",
