@@ -57,12 +57,14 @@ function LoginScreen() {
         ref={email}
         hint={strings.enterYourEmail}
         leftIcon={"account-circle-outline"}
+        enableKeyboardAvoidingView={true}
       />
       <MementoTextInput
         ref={password}
         hint={strings.enterYourPassword}
         leftIcon={"lock-outline"}
         isPasswordField={true}
+        enableKeyboardAvoidingView={true}
       />
       <MementoButton
         label={strings.Signin}
@@ -102,8 +104,6 @@ function scaffold(body: React.JSX.Element) {
 const styles = StyleSheet.create({
   container: {
     height: DimensionsUtilConstants.screenHeight,
-    alignContent: "center",
-    alignItems: "center",
     justifyContent: "center",
   },
   textTitle: {
