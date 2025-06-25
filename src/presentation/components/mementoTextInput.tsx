@@ -32,7 +32,7 @@ function MementoTextInput({
       right={
         isPasswordField === true ? (
           <TextInput.Icon
-            icon={isPasswordVisible ? "eye-off" : "eye"}
+            icon={isPasswordVisible ? "eye" : "eye-off"}
             onPress={() => setPasswordVisibility((prev) => !prev)}
           />
         ) : undefined
