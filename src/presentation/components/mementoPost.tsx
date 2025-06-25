@@ -7,55 +7,61 @@ import { useState } from "react";
 
 type MementoPostProps = {
   post: Post;
+  onPostClick?: () => void;
   onLikeClick: (isLiked: boolean) => void;
 };
 
-function MementoPost({ post, onLikeClick }: MementoPostProps) {
+function MementoPost({ post, onLikeClick, onPostClick }: MementoPostProps) {
   const [isLiked, setLike] = useState(false);
 
   return (
-    <View style={styles.card}>
-      <View style={styles.profileRow}>
-        <ImageLoader
-          style={styles.profileImage}
-          resizeMode="cover"
-          source={{ uri: post.user.profileImage }}
-        />
-        <View>
-          <Text>{post.user.username}</Text>
-          <Text>{post.timestamp}</Text>
+    <TouchableOpacity
+      onPress={onPostClick}
+      activeOpacity={onPostClick ? undefined : 1}
+    >
+      <View style={styles.card}>
+        <View style={styles.profileRow}>
+          <ImageLoader
+            style={styles.profileImage}
+            resizeMode="cover"
+            source={{ uri: post.user.profileImage }}
+          />
+          <View>
+            <Text>{post.user.username}</Text>
+            <Text>{post.timestamp}</Text>
+          </View>
+        </View>
+        <Text style={styles.postText}>{post.body}</Text>
+        <View style={styles.imageContainer}>
+          <ImageLoader
+            style={styles.image}
+            resizeMode="cover"
+            source={{ uri: post.image }}
+          />
+        </View>
+
+        <View style={styles.reactionsRow}>
+          <TouchableOpacity
+            style={styles.reactionItem}
+            onPress={() => {
+              setLike((state) => !state);
+              onLikeClick(isLiked);
+            }}
+          >
+            <AntDesign
+              name={isLiked ? "like1" : "like2"}
+              size={24}
+              color="black"
+            />
+            <Text>{isLiked ? post.numberOfLikes + 1 : post.numberOfLikes}</Text>
+          </TouchableOpacity>
+          <View style={styles.reactionItem}>
+            <AntDesign name="message1" size={24} color="black" />
+            <Text>{post.numberOfComments}</Text>
+          </View>
         </View>
       </View>
-      <Text style={styles.postText}>{post.body}</Text>
-      <View style={styles.imageContainer}>
-        <ImageLoader
-          style={styles.image}
-          resizeMode="cover"
-          source={{ uri: post.image }}
-        />
-      </View>
-
-      <View style={styles.reactionsRow}>
-        <TouchableOpacity
-          style={styles.reactionItem}
-          onPress={() => {
-            setLike((state) => !state);
-            onLikeClick(isLiked);
-          }}
-        >
-          <AntDesign
-            name={isLiked ? "like1" : "like2"}
-            size={24}
-            color="black"
-          />
-          <Text>{isLiked ? post.numberOfLikes + 1 : post.numberOfLikes}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.reactionItem} onPress={() => {}}>
-          <AntDesign name="message1" size={24} color="black" />
-          <Text>{post.numberOfComments}</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

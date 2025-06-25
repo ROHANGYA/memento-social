@@ -5,4 +5,5 @@ export enum Routes {
   Chat = "Chat",
   Notification = "Notification",
   Profile = "Profile",
+  PostDetails = "PostDetails",
 }

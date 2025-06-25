@@ -5,7 +5,7 @@ import Animated from "react-native-reanimated";
 import MementoPost from "../../components/mementoPost";
 import Post from "../../../domain/entities/post";
 import React, { useCallback, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalisation } from "../../../lang/lang";
@@ -18,6 +18,7 @@ import HomeEmptyPlaceholder from "./homeEmptyPlaceholder";
 import HomeLoadingFooter from "./homeLoadingFooter";
 import HomeErrorFooter from "./homeErrorFooter";
 import Constants from "../../../utils/constants";
+import { Routes } from "../../navigation/routes";
 
 function HomeScreen() {
   const strings = useLocalisation();
@@ -36,7 +37,12 @@ function HomeScreen() {
         <MementoPost
           key={info.index}
           post={info.item}
-          onLikeClick={function (isLiked: boolean): void {}}
+          onPostClick={() => {
+            navigation.dispatch(
+              StackActions.push(Routes.PostDetails, { postId: info.index })
+            );
+          }}
+          onLikeClick={(isLiked: boolean) => {}}
         />
       );
     },

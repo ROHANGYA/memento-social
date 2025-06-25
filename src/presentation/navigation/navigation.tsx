@@ -8,6 +8,7 @@ import ChatScreen from "../screens/chat/chatScreen";
 import NotificationScreen from "../screens/notification/notificationScreen";
 import ProfileScreen from "../screens/profile/profileScreen";
 import MementoBottomNavigationBar from "../components/mememtoBottomNavigationBar";
+import PostDetailScreen from "../screens/postDetails/postDetailsScreen";
 
 export type RootStackNavArguments = {
   [Routes.Login]: undefined;
@@ -16,6 +17,7 @@ export type RootStackNavArguments = {
   [Routes.Chat]: undefined;
   [Routes.Notification]: undefined;
   [Routes.Profile]: undefined;
+  [Routes.PostDetails]: { postId: number };
 };
 
 export default function AppNavigation() {
@@ -29,10 +31,15 @@ export default function AppNavigation() {
           component={LoginScreen}
           options={{ headerShown: false }}
         />
-        {/* The bottom Nav Bar */}
         <stack.Screen
+          /* The bottom Nav Bar */
           name={Routes.Main}
           component={HomeTabs}
+          options={{ headerShown: false }}
+        />
+        <stack.Screen
+          name={Routes.PostDetails}
+          component={PostDetailScreen}
           options={{ headerShown: false }}
         />
       </stack.Navigator>
