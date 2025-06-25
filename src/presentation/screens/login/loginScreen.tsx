@@ -17,6 +17,7 @@ import LoadingPlaceholder from "../../components/loadingPlaceholder";
 import ErrorPlaceholder from "../../components/errorPlaceholder";
 import { useEffect, useRef } from "react";
 import { logoFontFamily } from "../../styles/theme";
+import { DimensionsUtilConstants } from "../../../utils/dimensionsUtil";
 
 function LoginScreen() {
   const strings = useLocalisation();
@@ -100,7 +101,7 @@ function scaffold(body: React.JSX.Element) {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    height: DimensionsUtilConstants.screenHeight,
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center",

@@ -2,6 +2,7 @@ import { TextInput, useTheme } from "react-native-paper";
 import { StyleSheet } from "react-native";
 import { IconSource } from "react-native-paper/lib/typescript/components/Icon";
 import React, { RefObject, useState } from "react";
+import { percentageOfScreenWidth } from "../../utils/dimensionsUtil";
 
 type MementoTextInputProps = {
   leftIcon?: IconSource;
@@ -45,8 +46,7 @@ function MementoTextInput({
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "auto",
+    width: percentageOfScreenWidth(0.9),
     marginBottom: 20,
   },
 });
