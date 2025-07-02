@@ -73,7 +73,9 @@ function MementoBottomNavigationBar({
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    // height: 80,
+  },
 });
 
 export default MementoBottomNavigationBar;

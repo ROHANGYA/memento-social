@@ -12,4 +12,5 @@ export const stringMapping = {
   errorLoadingMorePosts: "errorLoadingMorePosts",
   thereAreNoPostsYet: "thereAreNoPostsYet",
   PleaseTryAgainLaterOrAddOne: "PleaseTryAgainLaterOrAddOne",
+  enterYourMessageHere: "enterYourMessageHere",
 };

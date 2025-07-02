@@ -11,5 +11,6 @@
   "forgotPassword": "Forgot password ?",
   "errorLoadingMorePosts": "Error loading more posts ... ",
   "thereAreNoPostsYet": "There are no posts yet !",
-  "PleaseTryAgainLaterOrAddOne": "Please try again later or be the first to add one"
+  "PleaseTryAgainLaterOrAddOne": "Please try again later or be the first to add one",
+  "enterYourMessageHere": "Enter your message here ..."
 }

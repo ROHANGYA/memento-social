@@ -6,7 +6,6 @@ import MementoPost from "../../components/mementoPost";
 import Post from "../../../domain/entities/post";
 import React, { useCallback, useEffect } from "react";
 import { StackActions, useNavigation } from "@react-navigation/native";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useLocalisation } from "../../../lang/lang";
 import { AppDispatch, RootState } from "../../state/store";

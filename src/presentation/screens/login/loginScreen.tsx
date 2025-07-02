@@ -50,7 +50,7 @@ function LoginScreen() {
   }
 
   return scaffold(
-    <>
+    <View style={styles.body}>
       <Text style={styles.textTitle}>{strings.mementoSocial}</Text>
       <Text style={styles.text}>{strings.loginToYourAccount}</Text>
       <MementoTextInput
@@ -77,13 +77,12 @@ function LoginScreen() {
           );
         }}
       />
-      <View style={styles.buttonPadding} />
       <MementoButton
         label={strings.forgotPassword}
         mode={"text"}
         onPress={() => {}}
       />
-    </>
+    </View>
   );
 }
 
@@ -106,20 +105,21 @@ const styles = StyleSheet.create({
     height: DimensionsUtilConstants.screenHeight,
     justifyContent: "center",
   },
+  body: {
+    gap: 20,
+  },
   textTitle: {
     fontSize: 48,
     fontFamily: logoFontFamily,
-    padding: 40,
+    padding: 30,
   },
   text: {
     alignSelf: "flex-start",
     marginBottom: 10,
   },
-  textInput: {
-    marginBottom: 10,
-  },
+
   buttonPadding: {
-    height: 20,
+    height: 8,
   },
 });
 

@@ -8,7 +8,7 @@ type MementoTextInputProps = {
   hint: string;
   isPasswordField?: boolean;
   enableKeyboardAvoidingView?: boolean;
-  ref: RefObject<String>;
+  ref: RefObject<string>;
 };
 
 function MementoTextInput({
@@ -51,9 +51,7 @@ function MementoTextInput({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-  },
+  container: {},
 });
 
 export default MementoTextInput;

@@ -1,11 +1,11 @@
-import { Button } from "react-native-paper";
+import { Button, IconButton } from "react-native-paper";
 import { StyleSheet } from "react-native";
 import { IconSource } from "react-native-paper/lib/typescript/components/Icon";
 
 type MementoButtonProps = {
-  label: string;
+  label?: string;
   icon?: IconSource;
-  mode: "text" | "contained" | "outlined";
+  mode: "text" | "contained" | "outlined" | "icon";
   isFullwidth?: boolean;
   onPress: () => void;
 };
@@ -17,7 +17,13 @@ function MementoButton({
   onPress,
   isFullwidth,
 }: MementoButtonProps) {
-  return (
+  return mode === "icon" ? (
+    <IconButton
+      icon={icon ?? ""}
+      onPress={onPress}
+      style={[isFullwidth ? styles.fullWidth : null]}
+    />
+  ) : (
     <Button
       icon={icon}
       mode={mode}

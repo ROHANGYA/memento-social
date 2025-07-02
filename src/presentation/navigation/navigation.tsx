@@ -7,8 +7,8 @@ import HomeScreen from "../screens/home/homeScreen";
 import ChatScreen from "../screens/chat/chatScreen";
 import NotificationScreen from "../screens/notification/notificationScreen";
 import ProfileScreen from "../screens/profile/profileScreen";
-import MementoBottomNavigationBar from "../components/mememtoBottomNavigationBar";
 import PostDetailScreen from "../screens/postDetails/postDetailsScreen";
+import MementoBottomNavigationBar from "../components/mememtoBottomNavigationBar";
 
 export type RootStackNavArguments = {
   [Routes.Login]: undefined;
@@ -25,7 +25,10 @@ export default function AppNavigation() {
 
   return (
     <NavigationContainer>
-      <stack.Navigator initialRouteName={Routes.Login}>
+      <stack.Navigator
+        initialRouteName={Routes.Login}
+        screenOptions={{ headerShown: false }}
+      >
         <stack.Screen
           name={Routes.Login}
           component={LoginScreen}
