@@ -30,6 +30,51 @@ function HomeScreen() {
     dispatch(fetchPosts());
   }, []);
 
+  // const query = `
+  //   query {
+  //     users {
+  //       id
+  //       name
+  //       email
+  //       phone
+  //     }
+  //   }
+  // `;
+
+  // type asss = {
+  //   data: {
+  //     users: users[];
+  //   };
+  // };
+
+  // type users = {
+  //   id: number;
+  //   name: string;
+  //   email: string;
+  //   phone: string;
+  // };
+
+  // function fetchdata(): Promise<asss> {
+  //   return fetch("https://graphqlplaceholder.vercel.app/graphql", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ query }),
+  //   }).then((response) => response.json());
+  // }
+
+  // const results = useQuery({
+  //   queryKey: ["test"],
+  //   queryFn: fetchdata,
+  // });
+
+  // console.log(`-------------------------------------------------`);
+  // console.log(`graph QL status: ${results.status}`);
+  // console.log(`graph QL fetch status: ${results.fetchStatus}`);
+  // console.log(`graph QL: ${results.data?.data.users.map((e) => e.name)}`);
+  // console.log(`-------------------------------------------------`);
+
   const renderPostItem = useCallback(
     (info: ListRenderItemInfo<Post>) => {
       return (
